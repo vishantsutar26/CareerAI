@@ -1,0 +1,40 @@
+const express = require('express');
+const authMiddleware = require('../middlewares/auth.middleware');
+const interviewRouter = express.Router();
+const interviewController = require('../controllers/interview.controller');
+const upload = require('../middlewares/file.middleware');
+
+/**
+ * @route POST /api/interview
+ * @description generate new interview report on the basis of user self description, resume pdf and job description
+ * @access private
+ */
+
+interviewRouter.post('/', authMiddleware.authUser, upload.single('resume'), interviewController.generateInterviewReportController);
+
+/**
+ * @route GET /api/interview/report/:interviewId
+ * @description get interview report by interviewId
+ * @access private
+ */
+
+interviewRouter.get('/report/:interviewId', authMiddleware.authUser, interviewController.getInterviewReportByIdController);
+
+
+/**
+ * @route GET /api/intervew/
+ * @description get all interview reports of logged in user
+ * @access private
+ */
+
+interviewRouter.get('/',authMiddleware.authUser, interviewController.getAllInterviewReportsController);
+
+/**
+ * @route DELETE /api/interview/report/:interviewId
+ * @description delete an interview report of the logged in user
+ * @access private
+ */
+
+interviewRouter.delete('/report/:interviewId', authMiddleware.authUser, interviewController.deleteInterviewReportController);
+
+module.exports = interviewRouter;

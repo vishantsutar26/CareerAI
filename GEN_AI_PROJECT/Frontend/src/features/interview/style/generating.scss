@@ -1,0 +1,77 @@
+.generating-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(24, 24, 24, 0.85);
+    backdrop-filter: blur(6px);
+
+    &__card {
+        width: 100%;
+        max-width: 420px;
+        background: #141416;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.25rem;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+        h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+    }
+
+    &__spinner {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top-color: #ff3d81;
+        border-right-color: #a855f7;
+        animation: generating-spin 0.9s linear infinite;
+    }
+
+    &__step {
+        min-height: 1.4em;
+        color: #d1d5db;
+        font-size: 0.95rem;
+    }
+
+    &__progress {
+        display: flex;
+        gap: 0.4rem;
+        margin-top: 0.25rem;
+    }
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        transition: background 0.3s ease;
+
+        &--active {
+            background: linear-gradient(90deg, #ff3d81, #a855f7);
+        }
+    }
+
+    &__note {
+        margin-top: 0.5rem;
+        color: #6b7280;
+        font-size: 0.8rem;
+    }
+}
+
+@keyframes generating-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
